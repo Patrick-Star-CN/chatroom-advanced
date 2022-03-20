@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  height: 700px;
+  width: 1200px;
+  margin: 0 auto;
+}
+.ant-layout-sider {
+  background-color: #1677ff;
+}
+.ant-layout-header {
+  background: #f0f2f5;
+}
