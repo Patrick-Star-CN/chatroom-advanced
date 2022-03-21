@@ -5,6 +5,7 @@ import './index.css';
 import ToolsBar from '../components/ToolsBar';
 import Textarea from '../components/Textarea';
 import SendLine from '../components/SendLine';
+import Message from '../components/Message';
 
 export default function Room(props: any) {
   const myName: string = 'j10c';
@@ -20,7 +21,20 @@ export default function Room(props: any) {
           </Sider>
           <Layout>
             <Header>{roomName}</Header>
-            <Content></Content>
+            <Content>
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+            </Content>
             <Footer>
               <ToolsBar />
               <Textarea />

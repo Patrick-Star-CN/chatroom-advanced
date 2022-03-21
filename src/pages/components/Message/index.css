@@ -1,0 +1,21 @@
+.content {
+  display: flex;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.my-msg {
+  justify-content: flex-end;
+}
+
+.other-msg {
+  justify-content: flex-start;
+}
+
+.text {
+  font-size: 15px;
+  padding: 10px;
+  background-color: #1677ff;
+  margin: 0 10px;
+  color: white;
+}
