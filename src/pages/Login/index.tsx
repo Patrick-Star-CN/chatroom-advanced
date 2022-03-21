@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { Card, Form, Input, Button, Checkbox } from 'antd';
 import './index.css';
 
-export default function Login() {
+export default function Login(props: any) {
   let [isUser, setIsUser] = useState(false);
-
+  // isUser 表示该访问者已经是用户，按钮文字需要显示成“登录”
   const onFinish = (values: any) => {
+    // 已经完成表单
     console.log('userName: ', values.username);
     console.log('password: ', values.password);
     disappear();
@@ -19,9 +20,10 @@ export default function Login() {
   };
   const disappear = () => {
     document.querySelector('.login')?.classList.add('disappear');
+    props.setVisible(true); //
   };
-  return (
-    <div className="login">
+  if (!props.visible) {
+    return (
       <Card
         title="登录聊天室"
         bordered={true}
@@ -30,7 +32,7 @@ export default function Login() {
             还没有帐号?
           </Button>
         }
-        style={{ width: 400 }}
+        className="login shadow"
       >
         <Form
           name="basic"
@@ -46,7 +48,7 @@ export default function Login() {
             name="username"
             rules={[{ required: true, message: '请输入你的用户名！' }]}
           >
-            <Input />
+            <Input style={{ width: '80%' }} />
           </Form.Item>
 
           <Form.Item
@@ -54,7 +56,7 @@ export default function Login() {
             name="password"
             rules={[{ required: true, message: '请输入你的密码!' }]}
           >
-            <Input.Password />
+            <Input.Password style={{ width: '80%' }} />
           </Form.Item>
 
           <Form.Item
@@ -66,12 +68,12 @@ export default function Login() {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={{ width: '50%' }}>
               {!isUser ? '登录' : '注册'}
             </Button>
           </Form.Item>
         </Form>
       </Card>
-    </div>
-  );
+    );
+  } else return null;
 }

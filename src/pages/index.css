@@ -1,4 +1,3 @@
-body {
-  justify-content: center;
-  background-color: lightgray;
+.main {
+  height: 100vh;
 }

@@ -5,7 +5,7 @@ import './index.css';
 export default function SendLine() {
   const style = {
     display: 'flex',
-    'justify-content': 'flex-end',
+    justifyContent: 'flex-end',
   };
   return (
     <div className="sendLine" style={style}>
