@@ -10,3 +10,7 @@
 .ant-layout-header {
   background: #f0f2f5;
 }
+.ant-layout-footer {
+  border-top: 1px solid lightgrey;
+  padding: 20px;
+}

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Layout, Button } from 'antd';
+import { Layout, Button, Divider } from 'antd';
 const { Sider, Header, Content, Footer } = Layout;
 import './index.css';
 import { locationsAreEqual } from 'history-with-query';
-import Toolsbar from '../components/Toolsbar';
+import ToolsBar from '../components/ToolsBar';
 import Textarea from '../components/Textarea';
+import SendLine from '../components/SendLine';
 
 export default function Room() {
   const myName: string = 'j10c';
@@ -20,9 +21,9 @@ export default function Room() {
           <Header>{roomName}</Header>
           <Content></Content>
           <Footer>
-            <div className="reply">
-              <Toolsbar />
-            </div>
+            <ToolsBar />
+            <Textarea />
+            <SendLine />
           </Footer>
         </Layout>
       </Layout>

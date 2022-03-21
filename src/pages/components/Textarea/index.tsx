@@ -1,3 +1,5 @@
+import './index.css';
+
 export default function Textarea() {
-  return <Textarea></Textarea>;
+  return <div className="textarea" contentEditable="true"></div>;
 }
