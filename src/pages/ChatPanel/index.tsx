@@ -2,25 +2,24 @@ import React from 'react';
 import { Layout, Button, Divider } from 'antd';
 const { Sider, Header, Content, Footer } = Layout;
 import './index.css';
-import ToolsBar from '../components/ToolsBar';
-import Textarea from '../components/Textarea';
-import SendLine from '../components/SendLine';
 import Message from '../components/Message';
+import GroupList from '../components/GroupList';
+import Editor from '../components/Editor';
 
-export default function Room(props: any) {
-  const myName: string = 'j10c';
-  const roomName: string = 'room1';
+export default function ChatPanel(props: any) {
+  const roomName: string = '相亲相爱一家人';
   if (props.visible) {
     // roomVisible = true 显示房间
     return (
-      <div className="room shadow">
+      <div className="panel shadow">
         <Layout>
-          <Sider>
-            <h1>{myName}</h1>
-            <div className="friend-box"></div>
+          <Sider className="sider">
+            <GroupList />
           </Sider>
           <Layout>
-            <Header>{roomName}</Header>
+            <Header style={{ textAlign: 'center' }}>
+              <h3>{roomName}</h3>
+            </Header>
             <Content>
               <Message />
               <Message />
@@ -36,9 +35,7 @@ export default function Room(props: any) {
               <Message />
             </Content>
             <Footer>
-              <ToolsBar />
-              <Textarea />
-              <SendLine />
+              <Editor />
             </Footer>
           </Layout>
         </Layout>

@@ -1,4 +1,4 @@
-.room {
+.panel {
   display: flex;
   height: 700px;
   width: 1200px;
@@ -19,4 +19,7 @@
 .ant-layout-content {
   overflow-y: scroll;
   padding: 30px;
+}
+.sider {
+  background-color: white;
 }

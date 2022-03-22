@@ -7,5 +7,33 @@ box-shadow:
   41.8px 41.8px 56.5px rgba(0, 0, 0, 0.05),
   100px 100px 80px rgba(0, 0, 0, 0.07)
 ;
+}
+div::-webkit-scrollbar {
+  width: 6px;
+}
+div::-webkit-scrollbar-track {
+  background: rgb(239, 239, 239);
+  border-radius: 2px;
+}
+div::-webkit-scrollbar-thumb {
+  background: #e6f4ff;
+  border-radius: 10px;
+}
+div::-webkit-scrollbar-thumb:hover {
+  background: #e6f4ff;
+}
 
+main::-webkit-scrollbar {
+  width: 6px;
+}
+main::-webkit-scrollbar-track {
+  background: rgb(239, 239, 239);
+  border-radius: 2px;
+}
+main::-webkit-scrollbar-thumb {
+  background: #91caff;
+  border-radius: 10px;
+}
+main::-webkit-scrollbar-thumb:hover {
+  background: #91caff;
 }
