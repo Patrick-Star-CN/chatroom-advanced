@@ -17,10 +17,10 @@ const data = [
 ];
 // 获取 state 的时候记得用 useState() 初始化一遍，因为状态要进入聊天室后会更新
 
-export default function GroupList() {
+export default function GroupList(props: any) {
   return (
     <>
-      <UserInfo />
+      <UserInfo name={props.name} />
       <div className="group-list">
         <div className="list">
           <List
