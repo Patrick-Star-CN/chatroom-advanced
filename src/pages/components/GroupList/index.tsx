@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { List, Divider, Tag, Space } from 'antd';
 import { LockFilled } from '@ant-design/icons';
 import UserInfo from '../UserInfo';
@@ -8,12 +9,15 @@ const data = [
   { name: 'abc', state: false, locked: true },
   { name: 'hello', state: true, locked: true },
   { name: '123GTD', state: false, locked: false },
-  { name: 'SummersDay', state: false, locked: true },
-  { name: 'SummersDay', state: false, locked: true },
-  { name: 'SummersDay', state: false, locked: false },
-  { name: 'SummersDay', state: false, locked: false },
-  { name: 'SummersDay', state: false, locked: false },
-  { name: 'SummersDay', state: false, locked: false },
+  { name: 'SummersDay1', state: false, locked: true },
+  { name: 'SummersDay2', state: false, locked: true },
+  { name: 'SummersDay3', state: false, locked: false },
+  { name: 'SummersDay4', state: false, locked: false },
+  { name: 'SummersDay5', state: false, locked: false },
+  { name: 'SummersDay6', state: false, locked: false },
+  { name: 'SummersDay7', state: false, locked: false },
+  { name: 'SummersDay8', state: false, locked: false },
+  { name: 'SummersDay9', state: false, locked: false },
 ];
 // 获取 state 的时候记得用 useState() 初始化一遍，因为状态要进入聊天室后会更新
 
@@ -26,8 +30,12 @@ export default function GroupList(props: any) {
           <List
             size="large"
             dataSource={data}
-            renderItem={(item) => (
-              <List.Item>
+            renderItem={(item, index) => (
+              <List.Item
+                onClick={(e) => {
+                  Enter(index, props.changeGroupName);
+                }}
+              >
                 <Space>
                   <State joined={item.state}></State>
                   {item.name}
@@ -62,4 +70,10 @@ function Lock(pros: any) {
 // 群聊数量计数器
 function Counter() {
   return <span className="counter">共计 {data.length} 个群聊</span>;
+}
+
+function Enter(index: number, changeGroupName: any) {
+  changeGroupName(data[index].name, data[index].locked);
+
+  //console.log(changeGroupName);
 }

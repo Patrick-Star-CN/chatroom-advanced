@@ -6,8 +6,10 @@ import ChatPanel from './ChatPanel';
 export default function IndexPage() {
   let [panelVisible, setPanelVisible] = useState(false);
   let [userName, setUserName] = useState('');
-  // roomVisible 控制聊天窗口是否显示
+  // paneVisible 控制聊天窗口是否显示
   // 刚进入是登录页面，所以不显示 (false)
+  // userName 记录输入的昵称，用于聊天室面板的渲染
+
   return (
     <div className="main">
       <Login

@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { Avatar } from 'antd';
 import './index.css';
 
-export default function Message() {
-  const userName = 'j10c';
-  const text = 'Hello world!';
+export default function Message(props: any) {
+  //group: string, from: string, content: string
+  const userName = props.from;
+  const text = props.content;
+
   const [myself, setMyself] = useState(false);
   // myself === true 表示该消息为用户本人所发
+
   if (myself) {
     return (
       <div className="content my-msg" title={userName}>
