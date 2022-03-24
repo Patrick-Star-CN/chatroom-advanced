@@ -1,11 +1,12 @@
-import { useContext } from 'react';
-import { List, Divider, Tag, Space } from 'antd';
+import { useContext, useState } from 'react';
+import { List, Divider, message, Space } from 'antd';
 import { LockFilled } from '@ant-design/icons';
 import UserInfo from '../UserInfo';
 import './index.css';
+import { io } from 'socket.io-client';
 
 // 聊天室名称
-let data = [
+let groupList = [
   { name: 'abc', state: false, locked: true },
   { name: 'hello', state: true, locked: true },
   { name: '123GTD', state: false, locked: false },
@@ -29,11 +30,11 @@ export default function GroupList(props: any) {
         <div className="list">
           <List
             size="large"
-            dataSource={data}
+            dataSource={groupList}
             renderItem={(item, index) => (
               <List.Item
                 onClick={(e) => {
-                  Enter(index, props.changeGroupName);
+                  Enter(index, props.changeGroupName, props.setCurGroup);
                 }}
               >
                 <Space>
@@ -56,7 +57,7 @@ function State(props: any) {
   let joined: boolean = props.joined;
   // joioned === true 已经加入该聊天室
   let color = joined ? 'blue' : 'red';
-  return <span style={{ color: color }}> # </span>;
+  return <span style={{ color: color }}>#</span>;
 }
 
 // 聊天室是否需要密码
@@ -69,11 +70,15 @@ function Lock(pros: any) {
 
 // 群聊数量计数器
 function Counter() {
-  return <span className="counter">共计 {data.length} 个群聊</span>;
+  return <span className="counter">共计 {groupList.length} 个群聊</span>;
 }
 
-function Enter(index: number, changeGroupName: any) {
-  changeGroupName(data[index].name, data[index].locked);
-
-  //console.log(changeGroupName);
+function Enter(index: number, changeGroupName: any, setCurGroup: any) {
+  if (groupList[index].locked) {
+    message.error('请输入密码');
+    return;
+  }
+  setCurGroup(index);
+  changeGroupName(groupList[index].name);
+  groupList[index].state = true;
 }

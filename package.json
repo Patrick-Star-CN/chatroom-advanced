@@ -23,6 +23,8 @@
     "@ant-design/pro-layout": "^6.5.0",
     "react": "17.x",
     "react-dom": "17.x",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
     "umi": "^3.5.21",
     "umi-hd": "^5.0.1"
   },

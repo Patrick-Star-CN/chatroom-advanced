@@ -32,6 +32,7 @@ function SendLine(props: any) {
             }
           }}
           type="primary"
+          disabled={props.curGroup === -1 ? true : false}
         >
           发送
         </Button>
@@ -65,11 +66,12 @@ export default function Editor(props: any) {
   newMessage.from = props.from;
   return (
     <div className="eitor">
-      <ToolsBar></ToolsBar>
+      <ToolsBar />
       <Textarea></Textarea>
       <SendLine
         addMessage={props.addMessage}
         setNewMessageContent={setNewMessageContent}
+        curGroup={props.curGroup}
       ></SendLine>
     </div>
   );
