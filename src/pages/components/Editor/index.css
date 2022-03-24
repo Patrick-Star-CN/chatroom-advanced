@@ -1,0 +1,15 @@
+.send-line {
+  display: flex;
+}
+.textarea {
+  min-height: 70px;
+  max-height: 300px;
+  font-size: 16px;
+  outline: 0;
+  line-height: 24px;
+  padding: 10px 0;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+}
