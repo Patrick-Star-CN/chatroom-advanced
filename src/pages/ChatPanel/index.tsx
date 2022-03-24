@@ -8,7 +8,12 @@ import Editor from '../components/Editor';
 
 export default function ChatPanel(props: any) {
   let [messageList, setMessageList] = useState([
-    { group: 'SummersDay', from: 'cx', content: 'hello' },
+    { group: '123GTD', from: 'cx', content: 'hello, welcome to 123GRD' },
+    { group: 'SummersDay1', from: 'cx', content: 'This is SummersDay' },
+    { group: 'SummersDay2', from: 'cx', content: 'hello' },
+    { group: 'SummersDay3', from: 'cx', content: 'Whats the weather today?' },
+    { group: 'SummersDay4', from: 'cx', content: 'good night' },
+    { group: 'SummersDay5', from: 'cx', content: '???' },
   ]);
 
   let [groupName, setGroupName] = useState('选择一个群组加入聊天吧！');
@@ -36,6 +41,7 @@ export default function ChatPanel(props: any) {
           <Sider className="sider rcorner-left">
             <GroupList
               name={userName}
+              curGroup={curGroup}
               setCurGroup={setCurGroup}
               changeGroupName={changeGroupName}
             />

@@ -1,14 +1,16 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { List, Divider, message, Space } from 'antd';
 import { LockFilled } from '@ant-design/icons';
 import UserInfo from '../UserInfo';
+import Comfirm from '../Comfirm';
 import './index.css';
 import { io } from 'socket.io-client';
 
 // 聊天室名称
 let groupList = [
   { name: 'abc', state: false, locked: true },
-  { name: 'hello', state: true, locked: true },
+  { name: 'hello', state: false, locked: true },
   { name: '123GTD', state: false, locked: false },
   { name: 'SummersDay1', state: false, locked: true },
   { name: 'SummersDay2', state: false, locked: true },
@@ -23,6 +25,7 @@ let groupList = [
 // 获取 state 的时候记得用 useState() 初始化一遍，因为状态要进入聊天室后会更新
 
 export default function GroupList(props: any) {
+  const [confirmVisible, setConfirmVisible] = useState(false);
   return (
     <>
       <UserInfo name={props.name} />
@@ -34,7 +37,13 @@ export default function GroupList(props: any) {
             renderItem={(item, index) => (
               <List.Item
                 onClick={(e) => {
-                  Enter(index, props.changeGroupName, props.setCurGroup);
+                  Enter(
+                    index,
+                    props.changeGroupName,
+                    props.setCurGroup,
+                    props.curGroup,
+                    setConfirmVisible,
+                  );
                 }}
               >
                 <Space>
@@ -47,6 +56,10 @@ export default function GroupList(props: any) {
           />
         </div>
         <Counter></Counter>
+        <Comfirm
+          confirmVisible={confirmVisible}
+          setConfirmVisible={setConfirmVisible}
+        />
       </div>
     </>
   );
@@ -73,11 +86,18 @@ function Counter() {
   return <span className="counter">共计 {groupList.length} 个群聊</span>;
 }
 
-function Enter(index: number, changeGroupName: any, setCurGroup: any) {
+function Enter(
+  index: number,
+  changeGroupName: any,
+  setCurGroup: any,
+  curGroup: number,
+  setConfirmVisible: any,
+) {
   if (groupList[index].locked) {
-    message.error('请输入密码');
+    setConfirmVisible(true);
     return;
   }
+  if (curGroup != -1) groupList[curGroup].state = false;
   setCurGroup(index);
   changeGroupName(groupList[index].name);
   groupList[index].state = true;
