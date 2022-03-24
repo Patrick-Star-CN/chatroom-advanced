@@ -1,27 +1,35 @@
-import { useState, useContext, createContext } from 'react';
+import { useState, createContext } from 'react';
 import ToolsBar from '../ToolsBar';
-import { Button, Space } from 'antd';
+import { Button, Space, message } from 'antd';
 import './index.css';
 
-const MessageContext = createContext({});
-let MessageContent = '';
 function SendLine(props: any) {
   const style = {
     display: 'flex',
     justifyContent: 'flex-end',
   };
-  const newMessage = useContext(MessageContext);
-  function submit() {
-    // addMessage
-    // console.log(newMessage[0]);
+
+  function submit(content?: string) {
+    if (content === '') {
+      message.error('请输入内容后再发送！');
+      return;
+    }
+    props.setNewMessageContent(content);
+    // TODO: backend
   }
+
   return (
     <div className="sendLine" style={style}>
       <Space size="large">
         <span style={{ color: 'lightgray' }}>Enter换行，Ctrl+Enter发送</span>
         <Button
           onClick={() => {
-            submit();
+            let ele = document.querySelector('.textarea');
+            if (ele) {
+              const content = ele.innerHTML;
+              submit(content);
+              ele.innerHTML = '';
+            }
           }}
           type="primary"
         >
@@ -42,16 +50,27 @@ export default function Editor(props: any) {
     from: '',
     content: '',
   });
+
+  function setNewMessageContent(content: any) {
+    setNewMessage((data) => {
+      // 待处理的值
+      let new_data = data;
+      new_data.content = content;
+      return new_data;
+    });
+    props.addMessage(newMessage.group, newMessage.from, newMessage.content);
+  }
+
   newMessage.group = props.groupName;
   newMessage.from = props.from;
-  console.log(newMessage);
   return (
     <div className="eitor">
-      <MessageContext.Provider value={[newMessage, setNewMessage]}>
-        <ToolsBar></ToolsBar>
-        <Textarea></Textarea>
-        <SendLine addMessage={props.addMessage}></SendLine>
-      </MessageContext.Provider>
+      <ToolsBar></ToolsBar>
+      <Textarea></Textarea>
+      <SendLine
+        addMessage={props.addMessage}
+        setNewMessageContent={setNewMessageContent}
+      ></SendLine>
     </div>
   );
 }
