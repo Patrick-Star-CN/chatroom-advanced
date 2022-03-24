@@ -12,15 +12,15 @@ const messageList = [
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
+  { group: 'SummersDay', from: 'j10c', content: 'hello world' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
+  { group: 'SummersDay', from: 'j10c', content: 'hi' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
-  { group: 'SummersDay', from: 'j10c', content: 'hello' },
-  { group: 'SummersDay', from: 'j10c', content: 'hello' },
-  { group: 'SummersDay', from: 'j10c', content: 'hello' },
+  { group: 'SummersDay', from: 'j10c', content: 'thank' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
   { group: 'SummersDay', from: 'j10c', content: 'hello' },
 ];
@@ -39,6 +39,10 @@ export default function ChatPanel(props: any) {
     setGroupName(newName);
   }
 
+  /* function addMessage(newMessage: object) {
+    messageList.push(newMessage);
+  } */
+
   if (props.visible) {
     // visible = true 显示 panel
     const userName: string = props.name;
@@ -54,6 +58,7 @@ export default function ChatPanel(props: any) {
             </Header>
             <Content>
               {messageList.map((item, index) => {
+                // console.log(messageList[index])
                 return (
                   <Message
                     group={item.group}
@@ -64,7 +69,8 @@ export default function ChatPanel(props: any) {
               })}
             </Content>
             <Footer>
-              <Editor />
+              {/* <Editor addMessage={addMessage} /> */}
+              <Editor groupName={groupName} from={props.name} />
             </Footer>
           </Layout>
         </Layout>
