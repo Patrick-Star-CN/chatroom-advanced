@@ -37,3 +37,15 @@ main::-webkit-scrollbar-thumb {
 main::-webkit-scrollbar-thumb:hover {
   background: #91caff;
 }
+.rcorner {
+  border-radius: 10px;
+}
+.rcorner-right {
+  border-radius: 0 10px 10px 0;
+}
+.rcorner-left {
+  border-radius: 10px 0 0 10px;
+}
+.smd-border {
+  border: 2px solid lightgray;
+}

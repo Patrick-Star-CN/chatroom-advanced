@@ -31,17 +31,20 @@ export default function ChatPanel(props: any) {
     // visible = true 显示 panel
     const userName: string = props.name;
     return (
-      <div className="panel shadow">
-        <Layout>
-          <Sider className="sider">
+      <div className="panel shadow rcorner smd-border">
+        <Layout className="rcorner">
+          <Sider className="sider rcorner-left">
             <GroupList
               name={userName}
               setCurGroup={setCurGroup}
               changeGroupName={changeGroupName}
             />
           </Sider>
-          <Layout style={{ justifyContent: 'space-between' }}>
-            <Header style={{ textAlign: 'center' }}>
+          <Layout
+            className="rcorner"
+            style={{ justifyContent: 'space-between' }}
+          >
+            <Header className="rcorner" style={{ textAlign: 'center' }}>
               <h3>{groupName}</h3>
             </Header>
             {curGroup != -1 ? (
@@ -68,7 +71,7 @@ export default function ChatPanel(props: any) {
                 }
               />
             )}
-            <Footer>
+            <Footer className="rcorner">
               <Editor
                 addMessage={addMessage}
                 groupName={groupName}

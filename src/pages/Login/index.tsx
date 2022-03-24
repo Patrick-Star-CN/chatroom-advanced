@@ -46,7 +46,11 @@ export default function Login(props: any) {
 
   if (!props.visible) {
     return (
-      <Card title="进入聊天室大厅" bordered={true} className="login shadow">
+      <Card
+        title="进入聊天室大厅"
+        bordered={true}
+        className="login shadow rcorner smd-border"
+      >
         <Form
           name="basic"
           labelCol={{ span: 8 }}

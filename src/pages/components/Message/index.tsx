@@ -13,7 +13,7 @@ export default function Message(props: any) {
   if (myself) {
     return (
       <div className="content my-msg" title={from}>
-        <div className="text">{text}</div>
+        <div className="text rcorner">{text}</div>
         <Avatar>{from.substring(0, 1)}</Avatar>
       </div>
     );
@@ -21,7 +21,7 @@ export default function Message(props: any) {
     return (
       <div className="content other-msg" title={from}>
         <Avatar>{from.substring(0, 1)}</Avatar>
-        <div className="text">{text}</div>
+        <div className="text rcorner">{text}</div>
       </div>
     );
   }
