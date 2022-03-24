@@ -40,12 +40,13 @@ export default function ChatPanel(props: any) {
   }
 
   if (props.visible) {
-    // roomVisible = true 显示房间
+    // visible = true 显示 panel
+    const userName: string = props.name;
     return (
       <div className="panel shadow">
         <Layout>
           <Sider className="sider">
-            <GroupList name={props.name} changeGroupName={changeGroupName} />
+            <GroupList name={userName} changeGroupName={changeGroupName} />
           </Sider>
           <Layout>
             <Header style={{ textAlign: 'center' }}>

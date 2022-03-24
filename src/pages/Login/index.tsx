@@ -1,9 +1,6 @@
-import { useContext, createContext } from 'react';
 import { Card, Form, Input, Button, Checkbox, message } from 'antd';
-import ChatPanel from '../ChatPanel';
 import './index.css';
 
-const UserNameContext = createContext('');
 export default function Login(props: any) {
   const onFinish = (values: any) => {
     if (values.username.length > 8) {

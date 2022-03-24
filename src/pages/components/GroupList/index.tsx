@@ -5,7 +5,7 @@ import UserInfo from '../UserInfo';
 import './index.css';
 
 // 聊天室名称
-const data = [
+let data = [
   { name: 'abc', state: false, locked: true },
   { name: 'hello', state: true, locked: true },
   { name: '123GTD', state: false, locked: false },
