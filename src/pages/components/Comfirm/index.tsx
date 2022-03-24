@@ -1,14 +1,21 @@
-import { useState } from 'react';
-import { Modal, Form, Input } from 'antd';
+import { useState, useEffect } from 'react';
+import { Modal, Form, Input, message } from 'antd';
 
 export default function Comfirm(props: any) {
+  const [form] = Form.useForm();
   const handleOk = () => {
+    console.log(form.getFieldValue('password'));
+    if (!form.getFieldValue('password')) {
+      message.error('请输入密码');
+      return;
+    }
     props.setConfirmVisible(false);
-    // setIsVisible(false);
+    form.resetFields();
+    props.unlock();
   };
   const handleCancel = () => {
     props.setConfirmVisible(false);
-    // setIsVisible(false);
+    form.resetFields();
   };
   return (
     <Modal
@@ -18,6 +25,7 @@ export default function Comfirm(props: any) {
       onCancel={handleCancel}
     >
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 10 }}

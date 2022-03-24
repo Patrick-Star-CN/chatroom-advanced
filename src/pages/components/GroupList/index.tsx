@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { List, Divider, message, Space } from 'antd';
-import { LockFilled } from '@ant-design/icons';
+import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import UserInfo from '../UserInfo';
 import Comfirm from '../Comfirm';
 import './index.css';
@@ -11,11 +11,11 @@ import { io } from 'socket.io-client';
 let groupList = [
   { name: 'abc', state: false, locked: true },
   { name: 'hello', state: false, locked: true },
-  { name: '123GTD', state: false, locked: false },
-  { name: 'SummersDay1', state: false, locked: true },
-  { name: 'SummersDay2', state: false, locked: true },
-  { name: 'SummersDay3', state: false, locked: false },
-  { name: 'SummersDay4', state: false, locked: false },
+  { name: '123GTD', state: false },
+  { name: 'SummersDay1', state: false },
+  { name: 'SummersDay2', state: false },
+  { name: 'SummersDay3', state: false },
+  { name: 'SummersDay4', state: false },
   { name: 'SummersDay5', state: false, locked: false },
   { name: 'SummersDay6', state: false, locked: false },
   { name: 'SummersDay7', state: false, locked: false },
@@ -24,6 +24,7 @@ let groupList = [
 ];
 // 获取 state 的时候记得用 useState() 初始化一遍，因为状态要进入聊天室后会更新
 
+let toUnlock: number;
 export default function GroupList(props: any) {
   const [confirmVisible, setConfirmVisible] = useState(false);
   return (
@@ -59,6 +60,10 @@ export default function GroupList(props: any) {
         <Comfirm
           confirmVisible={confirmVisible}
           setConfirmVisible={setConfirmVisible}
+          unlock={() => {
+            // console.log(props.curGroup);
+            groupList[toUnlock].locked = false;
+          }}
         />
       </div>
     </>
@@ -77,7 +82,8 @@ function State(props: any) {
 function Lock(pros: any) {
   let locked: boolean = pros.locked;
   // locked === ture 私密聊天室
-  if (locked) return <LockFilled />;
+  if (locked === true) return <LockFilled />;
+  else if (locked === false) return <UnlockFilled />;
   return null;
 }
 
@@ -94,6 +100,7 @@ function Enter(
   setConfirmVisible: any,
 ) {
   if (groupList[index].locked) {
+    toUnlock = index;
     setConfirmVisible(true);
     return;
   }
