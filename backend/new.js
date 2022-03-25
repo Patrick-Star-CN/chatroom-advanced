@@ -14,27 +14,30 @@ io.use((socket, next) => {
   next();
 });
 
-io.on('connection', socket => {
+io.on('connection', (socket) => {
   let nameThis = '';
   console.log('user connected');
 
-  socket.on('disconnect', socket => {
+  socket.on('disconnect', (socket) => {
     userAll.delete(name, socket);
     console.log(`${name} disconnected`);
     io.sockets.emit('online', [...userAll.keys()]);
   });
 
-  socket.on('login', (name, fn) => {
-    if(!name) {
-      fn('EMPTY_NAME_ERROR');
-    } else if(userAll.get(name) !== undefined) {
-      fn('SAME_NAME_ERROR');
+  socket.on('login', (name) => {
+    if (!name) {
+      io.sockets.emit('online', 'EMPTY_NAME_ERROR');
+      // fn('EMPTY_NAME_ERROR');
+    } else if (userAll.get(name) !== undefined) {
+      io.sockets.emit('online', 'SAME_NAME_ERROR');
+      // fn('SAME_NAME_ERROR');
     } else {
       console.log(name + ' has logined.');
       nameThis = name;
       userAll.set(name, socket);
       io.sockets.emit('online', [...userAll.keys()]);
-      fn('success');
+      // io.sockets.emit('online', 'SUCCESS');
+      // fn('success');
     }
   });
 
@@ -43,7 +46,7 @@ io.on('connection', socket => {
     const message = {
       time: Date.now(),
       sender: nameThis,
-      content
+      content,
     };
     socket.broadcast.to(roomid).emit('receiveMessage', message);
   });

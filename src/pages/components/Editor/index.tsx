@@ -59,7 +59,12 @@ export default function Editor(props: any) {
       new_data.content = content;
       return new_data;
     });
-    props.addMessage(newMessage.group, newMessage.from, newMessage.content);
+    props.addMessage(
+      newMessage.group,
+      newMessage.from,
+      newMessage.content,
+      true,
+    );
   }
 
   newMessage.group = props.groupName;

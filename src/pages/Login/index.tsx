@@ -12,16 +12,14 @@ export default function Login(props: any) {
     }
     // 已经完成表单
     socketExample.emit('login', values.username);
+
     socketExample.on('online', (content) => {
       console.log(content);
-    });
-    /* socketExample.emit('login', (data: any) => {
-      console.log(data);
-    }) */
+    }); // 预登录
+    // TODO: 检测用户名重复
 
     props.setName(values.username);
     disappear();
-    // socket 登录
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -17,6 +17,11 @@ export default function ChatPanel(props: any) {
     { group: 'SummersDay4', from: 'cx', content: 'good night' },
     { group: 'SummersDay5', from: 'cx', content: '???' },
   ]);
+  // socket 接受消息
+  /* socketExample.on('receiveMessage', (msg) => {
+    console.log(messageList)
+    addMessage(msg.group, msg.from, msg.content, false)
+  }) */
 
   let [groupName, setGroupName] = useState('选择一个群组加入聊天吧！');
   let [curGroup, setCurGroup] = useState(-1);
@@ -26,13 +31,23 @@ export default function ChatPanel(props: any) {
     setGroupName(newName);
   }
 
-  function addMessage(group: string, from: string, content: string) {
+  function addMessage(
+    group: string,
+    from: string,
+    content: string,
+    active: boolean,
+  ) {
     setMessageList([
       ...messageList,
       { group: group, from: from, content: content },
     ]);
-    // TODO:
-    socketExample.emit('sendMessage', 'fuck');
+    // socket 发送消息
+    if (active)
+      socketExample.emit('sendMessage', {
+        name: from,
+        content: content,
+        group: group,
+      });
   }
 
   if (props.visible) {
