@@ -1,26 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Card, Form, Input, Button, Checkbox, message } from 'antd';
-import webSocket from 'socket.io-client';
 import io from 'socket.io-client';
 import './index.css';
-
-// var socket = io('ws://localhost:3000');
-// socket.emit('sendMessage', '1231312313');
+import { socketExample } from '..';
 
 export default function Login(props: any) {
-  /* const initWebSocket = () => {
-    ws.on('online', message => {
-      console.log(message);
-    })
-  } */
   const onFinish = (values: any) => {
     if (values.username.length > 8) {
       message.error('请设定 8 个字符长度以下的昵称');
       return;
     }
     // 已经完成表单
+    socketExample.emit('login', values.username);
+    socketExample.on('online', (content) => {
+      console.log(content);
+    });
+    /* socketExample.emit('login', (data: any) => {
+      console.log(data);
+    }) */
+
     props.setName(values.username);
     disappear();
+    // socket 登录
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -33,15 +34,6 @@ export default function Login(props: any) {
   const disappear = () => {
     document.querySelector('.login')?.classList.add('disappear');
     props.setVisible(true); // ChatPanel 出现
-
-    // TODO: socket
-    // var socket = io('http://localhost:3000');
-    /* var socket = io({
-      query: {
-        name: 'j10c'
-      },
-      reconnection: false
-    }); */
   };
 
   if (!props.visible) {

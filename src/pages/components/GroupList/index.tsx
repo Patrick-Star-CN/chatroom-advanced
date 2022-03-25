@@ -5,7 +5,6 @@ import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import UserInfo from '../UserInfo';
 import Comfirm from '../Comfirm';
 import './index.css';
-import { io } from 'socket.io-client';
 
 // 聊天室名称
 let groupList = [

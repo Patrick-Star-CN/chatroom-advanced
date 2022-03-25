@@ -1,7 +1,12 @@
-import { useState } from 'react';
+import { useState, createContext } from 'react';
+import { io, Socket } from 'socket.io-client';
 import './index.css';
 import Login from './Login';
 import ChatPanel from './ChatPanel';
+
+export const socketExample = io('ws://localhost:3000', {
+  reconnection: false,
+});
 
 export default function IndexPage() {
   let [panelVisible, setPanelVisible] = useState(false);

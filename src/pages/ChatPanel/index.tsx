@@ -1,10 +1,12 @@
 import { useState, useContext, createContext, useEffect } from 'react';
 import { Layout, Empty, message } from 'antd';
 const { Sider, Header, Content, Footer } = Layout;
+import io from 'socket.io-client';
 import './index.css';
 import Message from '../components/Message';
 import GroupList from '../components/GroupList';
 import Editor from '../components/Editor';
+import { socketExample } from '..';
 
 export default function ChatPanel(props: any) {
   let [messageList, setMessageList] = useState([
@@ -30,6 +32,7 @@ export default function ChatPanel(props: any) {
       { group: group, from: from, content: content },
     ]);
     // TODO:
+    socketExample.emit('sendMessage', 'fuck');
   }
 
   if (props.visible) {
