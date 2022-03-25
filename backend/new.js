@@ -15,7 +15,7 @@ io.use((socket, next) => {
 });
 
 io.on('connection', socket => {
-  const nameThis;
+  let nameThis = '';
   console.log('user connected');
 
   socket.on('disconnect', socket => {
@@ -24,7 +24,7 @@ io.on('connection', socket => {
     io.sockets.emit('online', [...userAll.keys()]);
   });
 
-  socket.on('login', (name fn) => {
+  socket.on('login', (name, fn) => {
     if(!name) {
       fn('EMPTY_NAME_ERROR');
     } else if(userAll.get(name) !== undefined) {
@@ -42,7 +42,7 @@ io.on('connection', socket => {
     console.log('receive a message', name, content);
     const message = {
       time: Date.now(),
-      sender: name,
+      sender: nameThis,
       content
     };
     socket.broadcast.to(roomid).emit('receiveMessage', message);
