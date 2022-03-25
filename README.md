@@ -2,14 +2,20 @@
 
 ## Getting Started
 
-Install dependencies,
+### 
+安装依赖
 
 ```bash
 $ yarn
 ```
 
-Start the dev server,
+启动前端服务
 
 ```bash
 $ yarn start
 ```
+
+启动后端服务
+
+```bash
+$ node /backend/new.js
