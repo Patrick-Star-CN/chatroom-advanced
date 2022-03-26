@@ -16,11 +16,13 @@ io.use((socket, next) => {
 
 io.on('connection', (socket) => {
   let nameThis = '';
-  console.log('user connected');
+  console.log('client connected');
 
   socket.on('disconnect', (socket) => {
-    userAll.delete(name, socket);
-    console.log(`${name} disconnected`);
+    if (nameThis !== '') {
+      userAll.delete(nameThis, socket);
+      console.log(`${nameThis} disconnected`);
+    }
     io.sockets.emit('online', [...userAll.keys()]);
   });
 
@@ -41,14 +43,21 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('sendMessage', (content) => {
-    console.log('receive a message', name, content);
+  socket.on('sendMessage', (msg) => {
+    console.log(
+      "receive a message:'",
+      msg.content,
+      "' from '",
+      msg.name,
+      'in',
+      msg.group,
+    );
     const message = {
-      time: Date.now(),
-      from: nameThis,
-      content,
+      group: msg.group,
+      from: msg.name,
+      content: msg.content,
     };
-    socket.broadcast.to(roomid).emit('receiveMessage', message);
+    socket.broadcast.emit('receiveMessage', message);
   });
 });
 
