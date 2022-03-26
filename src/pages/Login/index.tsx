@@ -1,22 +1,37 @@
 import { useState, useEffect, useContext } from 'react';
 import { Card, Form, Input, Button, Checkbox, message } from 'antd';
 import io from 'socket.io-client';
-import { socketExample } from '..';
+// import { socketExample } from '..';
 import './index.css';
+import { MessageListContext } from '..';
+
+export const socketExample = io('ws://localhost:3000', {
+  reconnection: false,
+});
 
 export default function Login(props: any) {
+  let elem = useContext(MessageListContext);
+  useEffect(() => {
+    socketExample.on('receiveMessage', (msg) => {
+      // console.log(msg);
+      // useContext(MessageListContext).toggleMessageList(msg)
+      elem.toggleMessageList(msg);
+    });
+  }, []);
+
   const onFinish = (values: any) => {
     if (values.username.length > 8) {
       message.error('请设定 8 个字符长度以下的昵称');
       return;
     }
     // 已经完成表单
-    socketExample.emit('login', values.username);
 
+    socketExample.emit('login', values.username);
     socketExample.on('online', (content) => {
       if (content === 'SAME_NAME_ERROR') {
         message.error('昵称与其他用户重复');
         return;
+        // window.location.reload();
       }
       props.setName(values.username);
       disappear();

@@ -5,7 +5,7 @@ import './index.css';
 import Message from '../components/Message';
 import GroupList from '../components/GroupList';
 import Editor from '../components/Editor';
-import { socketExample } from '..';
+import { socketExample } from '../Login';
 import { MessageListContext } from '..';
 
 export default function ChatPanel(props: any) {
@@ -39,6 +39,7 @@ export default function ChatPanel(props: any) {
       return state.concat([{ group: group, from: from, content: content }]);
     }); */
     elem.toggleMessageList({ group: group, from: from, content: content });
+
     // socket 发送消息
     if (active)
       socketExample.emit('sendMessage', {

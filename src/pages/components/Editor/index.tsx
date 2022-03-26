@@ -26,8 +26,11 @@ function SendLine(props: any) {
           onClick={() => {
             let ele = document.querySelector('.textarea');
             if (ele) {
-              const content = ele.innerHTML;
-              submit(content);
+              const content = ele.textContent;
+              if (!content) {
+                message.error('请输入内容再发送！');
+                return;
+              } else submit(content);
               ele.innerHTML = '';
             }
           }}

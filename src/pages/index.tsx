@@ -6,10 +6,6 @@ import ChatPanel from './ChatPanel';
 
 const initialMessageList = [{ group: '', from: '', content: '' }];
 
-export const socketExample = io('ws://localhost:3000', {
-  reconnection: false,
-});
-
 export let MessageListContext = createContext({
   messageList: initialMessageList,
   toggleMessageList: (msg: any) => {},
@@ -22,12 +18,6 @@ export default function IndexPage() {
   // 刚进入是登录页面，所以不显示 (false)
   // userName 记录输入的昵称，用于聊天室面板的渲染
 
-  useEffect(() => {
-    socketExample.on('receiveMessage', (msg) => {
-      // console.log(msg);
-      toggleMessageList(msg);
-    });
-  }, []);
   let [messageList, setMessageList] = useState(initialMessageList.slice(1));
   /* let [messageList, setMessageList] = useState([
     { group: '123GTD', from: 'cx', content: 'hello, welcome to 123GRD' },
@@ -43,6 +33,8 @@ export default function IndexPage() {
     setMessageList((state) => {
       return state.concat([msg]);
     });
+    let ele = document.querySelector('main');
+    if (ele) ele.scrollTop = ele.scrollHeight + 1000;
   }
 
   return (

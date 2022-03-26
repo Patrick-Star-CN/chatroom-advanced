@@ -8,18 +8,14 @@ import './index.css';
 
 // 聊天室名称
 let groupList = [
-  { name: 'abc', state: false, locked: true },
-  { name: 'hello', state: false, locked: true },
+  { name: '答疑室', state: false },
+  { name: '地球村', state: false, locked: true },
   { name: '123GTD', state: false },
-  { name: 'SummersDay1', state: false },
-  { name: 'SummersDay2', state: false },
-  { name: 'SummersDay3', state: false },
-  { name: 'SummersDay4', state: false },
-  { name: 'SummersDay5', state: false, locked: false },
-  { name: 'SummersDay6', state: false, locked: false },
-  { name: 'SummersDay7', state: false, locked: false },
-  { name: 'SummersDay8', state: false, locked: false },
-  { name: 'SummersDay9', state: false, locked: false },
+  { name: 'SummersDay', state: false },
+  { name: '一个群聊', state: false, locked: true },
+  { name: '精装房', state: false, locked: true },
+  { name: '毛坯房', state: false },
+  { name: '湖底花园业主群', state: false, locked: true },
 ];
 // 获取 state 的时候记得用 useState() 初始化一遍，因为状态要进入聊天室后会更新
 
