@@ -1,22 +1,14 @@
 import { useState, useContext, createContext, useEffect } from 'react';
 import { Layout, Empty, message } from 'antd';
 const { Sider, Header, Content, Footer } = Layout;
-import io from 'socket.io-client';
 import './index.css';
 import Message from '../components/Message';
 import GroupList from '../components/GroupList';
 import Editor from '../components/Editor';
 import { socketExample } from '..';
+import { MessageListContext } from '..';
 
 export default function ChatPanel(props: any) {
-  let [messageList, setMessageList] = useState([
-    { group: '123GTD', from: 'cx', content: 'hello, welcome to 123GRD' },
-    { group: 'SummersDay1', from: 'cx', content: 'This is SummersDay' },
-    { group: 'SummersDay2', from: 'cx', content: 'hello' },
-    { group: 'SummersDay3', from: 'cx', content: 'Whats the weather today?' },
-    { group: 'SummersDay4', from: 'cx', content: 'good night' },
-    { group: 'SummersDay5', from: 'cx', content: '???' },
-  ]);
   // TODO:socket 接受消息放这里会连续触发多次，不知道为啥？？？
   /* socket.on('receiveMessage', (msg) => {
     console.log(msg)
@@ -24,6 +16,7 @@ export default function ChatPanel(props: any) {
     // addMessage(msg.group, msg.from, msg.content, false)
   }) */
 
+  let elem = useContext(MessageListContext);
   let [groupName, setGroupName] = useState('选择一个群组加入聊天吧！');
   let [curGroup, setCurGroup] = useState(-1);
 
@@ -42,9 +35,10 @@ export default function ChatPanel(props: any) {
       ...messageList,
       { group: group, from: from, content: content },
     ]); */
-    setMessageList((state) => {
+    /* elem.toggleMessageList((state) => {
       return state.concat([{ group: group, from: from, content: content }]);
-    });
+    }); */
+    elem.toggleMessageList({ group: group, from: from, content: content });
     // socket 发送消息
     if (active)
       socketExample.emit('sendMessage', {
@@ -77,8 +71,8 @@ export default function ChatPanel(props: any) {
             </Header>
             {curGroup != -1 ? (
               <Content>
-                {messageList.map((item, index) => {
-                  // console.log(messageList[index])
+                {elem.messageList.map((item, index) => {
+                  // console.log(elem.messageList[index])
                   if (item.group === groupName)
                     return (
                       <Message

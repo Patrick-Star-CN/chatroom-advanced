@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { Card, Form, Input, Button, Checkbox, message } from 'antd';
 import io from 'socket.io-client';
-import './index.css';
 import { socketExample } from '..';
+import './index.css';
 
 export default function Login(props: any) {
   const onFinish = (values: any) => {
@@ -14,12 +14,14 @@ export default function Login(props: any) {
     socketExample.emit('login', values.username);
 
     socketExample.on('online', (content) => {
-      console.log(content);
+      if (content === 'SAME_NAME_ERROR') {
+        message.error('昵称与其他用户重复');
+        return;
+      }
+      props.setName(values.username);
+      disappear();
     }); // 预登录
     // TODO: 检测用户名重复
-
-    props.setName(values.username);
-    disappear();
   };
 
   const onFinishFailed = (errorInfo: any) => {

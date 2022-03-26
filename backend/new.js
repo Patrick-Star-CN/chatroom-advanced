@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
     console.log('receive a message', name, content);
     const message = {
       time: Date.now(),
-      sender: nameThis,
+      from: nameThis,
       content,
     };
     socket.broadcast.to(roomid).emit('receiveMessage', message);
