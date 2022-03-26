@@ -17,10 +17,11 @@ export default function ChatPanel(props: any) {
     { group: 'SummersDay4', from: 'cx', content: 'good night' },
     { group: 'SummersDay5', from: 'cx', content: '???' },
   ]);
-  // socket 接受消息
-  /* socketExample.on('receiveMessage', (msg) => {
-    console.log(messageList)
-    addMessage(msg.group, msg.from, msg.content, false)
+  // TODO:socket 接受消息放这里会连续触发多次，不知道为啥？？？
+  /* socket.on('receiveMessage', (msg) => {
+    console.log(msg)
+    console.log(counter)
+    // addMessage(msg.group, msg.from, msg.content, false)
   }) */
 
   let [groupName, setGroupName] = useState('选择一个群组加入聊天吧！');
@@ -37,10 +38,13 @@ export default function ChatPanel(props: any) {
     content: string,
     active: boolean,
   ) {
-    setMessageList([
+    /* setMessageList([
       ...messageList,
       { group: group, from: from, content: content },
-    ]);
+    ]); */
+    setMessageList((state) => {
+      return state.concat([{ group: group, from: from, content: content }]);
+    });
     // socket 发送消息
     if (active)
       socketExample.emit('sendMessage', {
